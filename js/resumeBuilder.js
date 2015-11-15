@@ -109,7 +109,7 @@ $('#topContacts').append(formattedGithub);
 $('#topContacts').append(formattedLocation);
 
 
-
+// Loop to show bio info
 
 if (bio.skills.length > 0) {
 	$('#header').append(HTMLskillsStart);
@@ -120,6 +120,7 @@ if (bio.skills.length > 0) {
 	}
 }
 
+// Create function to display work details
 
 function displayWork() {
 	if (work.jobs.length > 0) {
@@ -137,8 +138,7 @@ function displayWork() {
 }
 
 
-
-displayWork();
+// Click logger functionality
 
 $(document).click(function(loc) {
 	var x = loc.pageX;
@@ -146,4 +146,24 @@ $(document).click(function(loc) {
 	logClicks(x,y);
 });
 
+
+// Internationalize name
+
+
+function inName(name) {
+    name = name.trim().split(' ');
+	var lastName = name[1].toUpperCase();
+	var firstName = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
+	var finalName = firstName + ' ' + lastName;
+	return finalName;
+}
+
+$('#main').prepend(internationalizeButton);
+
+
+
+
+// Call functions
+
+displayWork();
 
