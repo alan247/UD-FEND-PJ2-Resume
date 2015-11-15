@@ -137,6 +137,26 @@ function displayWork() {
 	}
 }
 
+// Create function to display projects
+
+projects.display = function () {
+	projects = projects.projects;
+	for (x in projects) {
+		$("#projects").append(HTMLprojectStart);
+
+		var formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects[x].title);
+		var formattedProjectDates = HTMLprojectDates.replace('%data%', projects[x].dates);
+		var formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects[x].description);
+		var formattedProjectImage = HTMLprojectImage.replace('%data%', projects[x].images);
+
+		var formattedInput = formattedProjectTitle + formattedProjectDates + formattedProjectDescription + formattedProjectImage;
+
+		$(".project-entry:last").append(formattedInput);
+	}
+}
+
+
+
 
 // Click logger functionality
 
@@ -148,7 +168,6 @@ $(document).click(function(loc) {
 
 
 // Internationalize name
-
 
 function inName(name) {
     name = name.trim().split(' ');
@@ -166,4 +185,5 @@ $('#main').prepend(internationalizeButton);
 // Call functions
 
 displayWork();
+projects.display();
 
