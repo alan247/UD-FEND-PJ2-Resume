@@ -106,11 +106,12 @@ if (work.jobs.length > 0) {
 		$('#workExperience').append(HTMLworkStart);
 		var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[i].employer);
 		var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[i].title);
-		$('.work-entry:last').append(formattedEmployer + formattedTitle);
+		var formattedDates = HTMLworkDates.replace('%data%', work.jobs[i].dates);
+      	var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[i].location);
+      	var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[i].description);
+      	var finalFormat = formattedEmployer + formattedTitle + formattedDates + formattedLocation + formattedDescription;
+		$('.work-entry:last').append(finalFormat);
 	}
-
-
-
 }
 
 
