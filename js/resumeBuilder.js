@@ -89,6 +89,27 @@ var projects = {
 	]
 }
 
+// Display Bio info
+var formattedName = HTMLheaderName.replace('%data%', bio.name);
+var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
+var formattedBioPic = HTMLbioPic.replace('%data%', bio.pictureURL);
+var formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMessage);
+var formattedMobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
+var formattedEmail = HTMLemail.replace('%data%', bio.contacts.email);
+var formattedGithub = HTMLgithub.replace('%data%', bio.contacts.github);
+var formattedLocation = HTMLlocation.replace('%data%', bio.contacts.location);
+
+$('#header').prepend(formattedRole);
+$('#header').prepend(formattedName);
+$('#header').append(formattedBioPic);
+$('#header').append(formattedWelcomeMsg);
+$('#topContacts').append(formattedMobile);
+$('#topContacts').append(formattedEmail);
+$('#topContacts').append(formattedGithub);
+$('#topContacts').append(formattedLocation);
+
+
+
 
 if (bio.skills.length > 0) {
 	$('#header').append(HTMLskillsStart);
@@ -115,14 +136,14 @@ function displayWork() {
 	}
 }
 
+
+
+displayWork();
+
 $(document).click(function(loc) {
 	var x = loc.pageX;
 	var y = loc.pageY;
 	logClicks(x,y);
 });
-
-displayWork();
-
-
 
 
