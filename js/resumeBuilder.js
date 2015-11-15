@@ -90,7 +90,7 @@ var projects = {
 }
 
 
-if (bio.skills.length !== 0) {
+if (bio.skills.length > 0) {
 	$('#header').append(HTMLskillsStart);
 
 	for (var i in bio.skills) {
@@ -99,6 +99,19 @@ if (bio.skills.length !== 0) {
 	}
 }
 
+
+if (work.jobs.length > 0) {
+
+	for (var i in work.jobs) {
+		$('#workExperience').append(HTMLworkStart);
+		var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[i].employer);
+		var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[i].title);
+		$('.work-entry:last').append(formattedEmployer + formattedTitle);
+	}
+
+
+
+}
 
 
 
