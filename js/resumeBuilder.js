@@ -2,7 +2,7 @@ var bio = {
 	"name" : "Alan Sánchez",
 	"role" : "Web Developer",
 	"contacts" : {
-		"mobile" : "+52 1 55 8888 8888",
+		"mobile" : "+52 55 8888 8888",
 		"email" : "alan247@gmail.com",
 		"github" : "alan247",
 		"location" : "Mexico City"
@@ -10,8 +10,9 @@ var bio = {
 	"welcomeMessage" : "This is a sentence, isn't it amazing?",
 	"skills" : [
 		"Web development",
-		"Guitar",
-		"Others"
+		"Private pilot",
+		"Guitar player",
+		"Potential polyglot"
 	],
 	"biopic" : "https://avatars0.githubusercontent.com/u/15384320?v=3&s=460"
 }
@@ -47,39 +48,122 @@ bio.display = function() {
 }
 
 
+
+var work = {
+	"jobs" : [
+		{
+			"employer" : "Bricks",
+			"title" : "waiter",
+			"location" : "Mexico City",
+			"dates" : "2006 - 2007",
+			"description" : "Waiting tables with a smile"
+		},
+		{
+			"employer" : "Myself",
+			"title" : "Freelancer",
+			"location" : "N/A",
+			"dates" : "2007 - today",
+			"description" : "Working on own projects and a few external ones"
+		}
+	]
+}
+
+work.display = function () {
+	if (work.jobs.length > 0) {
+		for (var i in work.jobs) {
+			$('#workExperience').append(HTMLworkStart);
+			var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[i].employer);
+			var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[i].title);
+			var formattedDates = HTMLworkDates.replace('%data%', work.jobs[i].dates);
+	      	var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[i].location);
+	      	var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[i].description);
+	      	var finalFormat = formattedEmployer + formattedTitle + formattedDates + formattedLocation + formattedDescription;
+			$('.work-entry:last').append(finalFormat);
+		}
+	}
+}
+
+
+
+var projects = {
+	"projects" : [
+		{
+			"title" : "Porfolio",
+			"dates" : "October - November 2015",
+			"description" : "Portfolio project for Udacity Nanodegree",
+			"images" : [
+				"http://placehold.it/500x300/110000",
+				"http://placehold.it/501x301/330000"
+			]
+		},
+		{
+			"title" : "Responsive Blog",
+			"dates" : "October 2015",
+			"description" : "Blog with full responsiveness for Udacity Nanodegree",
+			"images" : [
+				"http://placehold.it/502x302/550000",
+				"http://placehold.it/503x303/770000"
+			]
+		},
+		{
+			"title" : "Resume made with Javascript",
+			"dates" : "November 2015",
+			"description" : "This page",
+			"images" : [
+				"http://placehold.it/504x304/990000",
+				"http://placehold.it/505x305/110000"
+			]
+		}
+	]
+}
+
+projects.display = function () {
+	projects = projects.projects;
+	for (i in projects) {
+		$("#projects").append(HTMLprojectStart);
+
+		var formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects[i].title);
+		var formattedProjectDates = HTMLprojectDates.replace('%data%', projects[i].dates);
+		var formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects[i].description);
+		var formattedInput = formattedProjectTitle + formattedProjectDates + formattedProjectDescription;
+
+		$(".project-entry:last").append(formattedInput);
+
+		var pImages = projects[i].images;
+		if (pImages.length > 0) {
+			for (var j = 0; j < pImages.length; j++) {
+				var formattedImage = HTMLprojectImage.replace('%data%', pImages[j]);
+				$(".project-entry:last").append(formattedImage);
+			}
+		}
+	}
+}
+
+
+
 var education = {
 	"schools" : [
 		{
-			"name" : "NCCA",
-			"location" : "Mexico City",
-			"degree" : "Junior High",
+			"name" : "University First",
+			"location" : "Mexico",
+			"degree" : "Life Sciences",
 			"majors" : [
-				"major1",
-				"major2"
+				"Love",
+				"Communication"
 			],
-			"dates" : 1999,
+			"dates" : 2008,
 			"url" : "http://school.com"
 		},
 		{
-			"name" : "ENP6",
-			"location" : "Mexico City",
-			"degree" : "Junior High",
+			"name" : "Unversity Second Experience",
+			"location" : "Munich",
+			"degree" : "Air Studies",
 			"majors" : [
-				"major1",
-				"major2"
+				"Winds",
+				"Pressure",
+				"Bernoulli"
 			],
-			"dates" : 1999,
-			"url" : "http://school.com"
-		},
-		{
-			"name" : "University of Lodz",
-			"location" : "Lodz",
-			"degree" : "BA",
-			"majors" : [
-				"major1",
-				"major2"
-			],
-			"dates" : 1999,
+			"dates" : 2010,
 			"url" : "http://school.com"
 		}
 	],
@@ -109,11 +193,16 @@ education.display = function() {
 		var formattedDegree = HTMLschoolDegree.replace('%data%', schools[i].degree);
 		var formattedDates = HTMLschoolDates.replace('%data%', schools[i].dates);
 		var formattedLocation = HTMLschoolLocation.replace('%data%', schools[i].location);
-		//ARRAY!var formatted Major = HTMLschoolMajor.replace('%data', schools[i].majors);
 
 		var schoolsFinalFormat = formattedName + formattedDegree + formattedDates + formattedLocation;
 
 		$('.education-entry:last').append(schoolsFinalFormat);
+
+		var majors = schools[i].majors;
+		for(var j = 0; j < majors.length; j++) {
+			var formattedMajor = HTMLschoolMajor.replace('%data%', majors[j]);
+			$('.education-entry:last').append(formattedMajor);
+		}
 	}
 
 	var online = education.onlineCourses;
@@ -130,86 +219,6 @@ education.display = function() {
 			var onlineFinalFormat = formattedTitle + formattedSchool + formattedOnlineDates + formattedURL;
 
 			$('.education-entry:last').append(onlineFinalFormat);
-		}
-	}
-}
-
-
-
-var work = {
-	"jobs" : [
-		{
-			"employer" : "Bricks",
-			"title" : "waiter",
-			"location" : "Mexico City",
-			"dates" : "2006 - 2007",
-			"description" : "Waiting tables with a smile"
-		},
-		{
-			"employer" : "Self",
-			"title" : "Freelancer",
-			"location" : "Around the world",
-			"dates" : "2007 - today",
-			"description" : "Working on own projects and a few external ones"
-		}
-	]
-}
-
-work.display = function () {
-	if (work.jobs.length > 0) {
-		for (var i in work.jobs) {
-			$('#workExperience').append(HTMLworkStart);
-			var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[i].employer);
-			var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[i].title);
-			var formattedDates = HTMLworkDates.replace('%data%', work.jobs[i].dates);
-	      	var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[i].location);
-	      	var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[i].description);
-	      	var finalFormat = formattedEmployer + formattedTitle + formattedDates + formattedLocation + formattedDescription;
-			$('.work-entry:last').append(finalFormat);
-		}
-	}
-}
-
-var projects = {
-	"projects" : [
-		{
-			"title" : "Porfolio",
-			"dates" : "October - November 2015",
-			"description" : "Portfolio project for Udacity Nanodegree",
-			"images" : [
-				"http://placehold.it/200/200",
-				"http://placehold.it/201/201"
-			]
-		},
-		{
-			"title" : "Responsive Blog",
-			"dates" : "Late October 2015",
-			"description" : "Blog with full responsiveness for Udacity Nanodegree",
-			"images" : [
-				"http://placehold.it/202/202",
-				"http://placehold.it/203/203"
-			]
-		}
-	]
-}
-
-projects.display = function () {
-	projects = projects.projects;
-	for (i in projects) {
-		$("#projects").append(HTMLprojectStart);
-
-		var formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects[i].title);
-		var formattedProjectDates = HTMLprojectDates.replace('%data%', projects[i].dates);
-		var formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects[i].description);
-		var formattedInput = formattedProjectTitle + formattedProjectDates + formattedProjectDescription;
-
-		$(".project-entry:last").append(formattedInput);
-
-		if (projects[i].images.length > 0) {
-			for (j in projects[i].images) {
-				var formattedImage = HTMLprojectImage.replace('%data%', projects[i].images[j]);
-				$(".project-entry:last").append(formattedImage);
-			}
 		}
 	}
 }
@@ -243,7 +252,7 @@ $('#mapDiv').append(googleMap);
 
 // Call functions
 bio.display();
-education.display();
 work.display();
 projects.display();
+education.display();
 
