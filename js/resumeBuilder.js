@@ -78,13 +78,19 @@ var projects = {
 			"title" : "Porfolio",
 			"dates" : "October - November 2015",
 			"description" : "Portfolio project for Udacity Nanodegree",
-			"images" : "http://placehold.it/200/200"
+			"images" : [
+				"http://placehold.it/200/200",
+				"http://placehold.it/201/201"
+			]
 		},
 		{
 			"title" : "Responsive Blog",
 			"dates" : "Late October 2015",
 			"description" : "Blog with full responsiveness for Udacity Nanodegree",
-			"images" : "http://placehold.it/200/200"
+			"images" : [
+				"http://placehold.it/202/202",
+				"http://placehold.it/203/203"
+			]
 		}
 	]
 }
@@ -141,17 +147,22 @@ function displayWork() {
 
 projects.display = function () {
 	projects = projects.projects;
-	for (x in projects) {
+	for (i in projects) {
 		$("#projects").append(HTMLprojectStart);
 
-		var formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects[x].title);
-		var formattedProjectDates = HTMLprojectDates.replace('%data%', projects[x].dates);
-		var formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects[x].description);
-		var formattedProjectImage = HTMLprojectImage.replace('%data%', projects[x].images);
-
-		var formattedInput = formattedProjectTitle + formattedProjectDates + formattedProjectDescription + formattedProjectImage;
+		var formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects[i].title);
+		var formattedProjectDates = HTMLprojectDates.replace('%data%', projects[i].dates);
+		var formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects[i].description);
+		var formattedInput = formattedProjectTitle + formattedProjectDates + formattedProjectDescription;
 
 		$(".project-entry:last").append(formattedInput);
+
+		if (projects[i].images.length > 0) {
+			for (j in projects[i].images) {
+				var formattedImage = HTMLprojectImage.replace('%data%', projects[i].images[j]);
+				$(".project-entry:last").append(formattedImage);
+			}
+		}
 	}
 }
 
