@@ -1,47 +1,63 @@
 var bio = {
 	"name" : "Alan Sánchez",
 	"role" : "Web Developer",
-	"welcomeMessage" : "This is a sentence, isn't it amazing?",
-	"pictureURL" : "https://avatars0.githubusercontent.com/u/15384320?v=3&s=460",
 	"contacts" : {
 		"mobile" : "+52 1 55 8888 8888",
 		"email" : "alan247@gmail.com",
 		"github" : "alan247",
 		"location" : "Mexico City"
 	},
+	"welcomeMessage" : "This is a sentence, isn't it amazing?",
 	"skills" : [
 		"Web development",
 		"Guitar",
 		"Others"
-	]
+	],
+	"biopic" : "https://avatars0.githubusercontent.com/u/15384320?v=3&s=460",
+	"display" : "function() {}"
 }
 
 var education = {
 	"schools" : [
 		{
 			"name" : "NCCA",
-			"city" : "Mexico City",
+			"location" : "Mexico City",
 			"degree" : "Junior High",
-			"dates" : "??"
+			"majors" : [
+				"major1",
+				"major2"
+			],
+			"dates" : 1999,
+			"url" : "http://school.com"
 		},
 		{
 			"name" : "ENP6",
-			"city" : "Mexico City",
-			"degree" : "High School",
-			"dates" : "??"
+			"location" : "Mexico City",
+			"degree" : "Junior High",
+			"majors" : [
+				"major1",
+				"major2"
+			],
+			"dates" : 1999,
+			"url" : "http://school.com"
 		},
 		{
 			"name" : "University of Lodz",
-			"city" : "Lodz",
+			"location" : "Lodz",
 			"degree" : "BA",
-			"dates" : "??"
+			"majors" : [
+				"major1",
+				"major2"
+			],
+			"dates" : 1999,
+			"url" : "http://school.com"
 		}
 	],
 	"onlineCourses" : [
 		{
 			"title" : "Design 101",
 			"school" : "Designlab",
-			"dates" : "2015",
+			"dates" : 2015,
 			"url" : "http://trydesignlab.com"
 		},
 		{
@@ -50,7 +66,8 @@ var education = {
 			"dates" : "2015",
 			"url" : "http://udacity.com"
 		}
-	]
+	],
+	"display" : "function(){}"
 }
 
 var work = {
@@ -69,7 +86,8 @@ var work = {
 			"dates" : "2007 - today",
 			"description" : "Working on own projects and a few external ones"
 		}
-	]
+	],
+	"display" : "function(){}"
 }
 
 var projects = {
@@ -92,7 +110,8 @@ var projects = {
 				"http://placehold.it/203/203"
 			]
 		}
-	]
+	],
+	"display" : "function(){}"
 }
 
 // Display Bio info
@@ -128,7 +147,7 @@ if (bio.skills.length > 0) {
 
 // Create function to display work details
 
-function displayWork() {
+work.display = function () {
 	if (work.jobs.length > 0) {
 		for (var i in work.jobs) {
 			$('#workExperience').append(HTMLworkStart);
@@ -191,10 +210,12 @@ function inName(name) {
 $('#main').prepend(internationalizeButton);
 
 
+// Map
 
+$('#mapDiv').append(googleMap);
 
 // Call functions
 
-displayWork();
+work.display();
 projects.display();
 
