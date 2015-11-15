@@ -13,9 +13,39 @@ var bio = {
 		"Guitar",
 		"Others"
 	],
-	"biopic" : "https://avatars0.githubusercontent.com/u/15384320?v=3&s=460",
-	"display" : "function() {}"
+	"biopic" : "https://avatars0.githubusercontent.com/u/15384320?v=3&s=460"
 }
+
+bio.display = function() {
+	var formattedName = HTMLheaderName.replace('%data%', bio.name);
+	var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
+	var formattedBioPic = HTMLbioPic.replace('%data%', bio.biopic);
+	var formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMessage);
+	var formattedMobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
+	var formattedEmail = HTMLemail.replace('%data%', bio.contacts.email);
+	var formattedGithub = HTMLgithub.replace('%data%', bio.contacts.github);
+	var formattedLocation = HTMLlocation.replace('%data%', bio.contacts.location);
+
+	$('#header').prepend(formattedRole);
+	$('#header').prepend(formattedName);
+	$('#header').append(formattedBioPic);
+	$('#header').append(formattedWelcomeMsg);
+	$('#topContacts').append(formattedMobile);
+	$('#topContacts').append(formattedEmail);
+	$('#topContacts').append(formattedGithub);
+	$('#topContacts').append(formattedLocation);
+
+
+	if (bio.skills.length > 0) {
+		$('#header').append(HTMLskillsStart);
+
+		for (var i in bio.skills) {
+			var formattedSkill = HTMLskills.replace('%data%', bio.skills[i]);
+			$('#skills').append(formattedSkill);
+		}
+	}
+}
+
 
 var education = {
 	"schools" : [
@@ -66,9 +96,45 @@ var education = {
 			"dates" : "2015",
 			"url" : "http://udacity.com"
 		}
-	],
-	"display" : "function(){}"
+	]
 }
+
+
+education.display = function() {
+	var schools = education.schools;
+	for(i in schools){
+
+		$('#education').append(HTMLschoolStart);
+		var formattedName = HTMLschoolName.replace('%data%', schools[i].name);
+		var formattedDegree = HTMLschoolDegree.replace('%data%', schools[i].degree);
+		var formattedDates = HTMLschoolDates.replace('%data%', schools[i].dates);
+		var formattedLocation = HTMLschoolLocation.replace('%data%', schools[i].location);
+		//ARRAY!var formatted Major = HTMLschoolMajor.replace('%data', schools[i].majors);
+
+		var schoolsFinalFormat = formattedName + formattedDegree + formattedDates + formattedLocation;
+
+		$('.education-entry:last').append(schoolsFinalFormat);
+	}
+
+	var online = education.onlineCourses;
+
+	if (online.length > 0) {
+		$('.education-entry:last').append(HTMLonlineClasses);
+
+		for(k in online){
+			var formattedTitle = HTMLonlineTitle.replace('%data%', online[k].title);
+			var formattedSchool = HTMLonlineSchool.replace('%data%', online[k].school);
+			var formattedOnlineDates = HTMLonlineDates.replace('%data%', online[k].dates);
+			var formattedURL = HTMLonlineURL.replace('%data%', online[k].url);
+
+			var onlineFinalFormat = formattedTitle + formattedSchool + formattedOnlineDates + formattedURL;
+
+			$('.education-entry:last').append(onlineFinalFormat);
+		}
+	}
+}
+
+
 
 var work = {
 	"jobs" : [
@@ -86,8 +152,22 @@ var work = {
 			"dates" : "2007 - today",
 			"description" : "Working on own projects and a few external ones"
 		}
-	],
-	"display" : "function(){}"
+	]
+}
+
+work.display = function () {
+	if (work.jobs.length > 0) {
+		for (var i in work.jobs) {
+			$('#workExperience').append(HTMLworkStart);
+			var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[i].employer);
+			var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[i].title);
+			var formattedDates = HTMLworkDates.replace('%data%', work.jobs[i].dates);
+	      	var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[i].location);
+	      	var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[i].description);
+	      	var finalFormat = formattedEmployer + formattedTitle + formattedDates + formattedLocation + formattedDescription;
+			$('.work-entry:last').append(finalFormat);
+		}
+	}
 }
 
 var projects = {
@@ -110,59 +190,8 @@ var projects = {
 				"http://placehold.it/203/203"
 			]
 		}
-	],
-	"display" : "function(){}"
+	]
 }
-
-// Display Bio info
-var formattedName = HTMLheaderName.replace('%data%', bio.name);
-var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
-var formattedBioPic = HTMLbioPic.replace('%data%', bio.pictureURL);
-var formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMessage);
-var formattedMobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
-var formattedEmail = HTMLemail.replace('%data%', bio.contacts.email);
-var formattedGithub = HTMLgithub.replace('%data%', bio.contacts.github);
-var formattedLocation = HTMLlocation.replace('%data%', bio.contacts.location);
-
-$('#header').prepend(formattedRole);
-$('#header').prepend(formattedName);
-$('#header').append(formattedBioPic);
-$('#header').append(formattedWelcomeMsg);
-$('#topContacts').append(formattedMobile);
-$('#topContacts').append(formattedEmail);
-$('#topContacts').append(formattedGithub);
-$('#topContacts').append(formattedLocation);
-
-
-// Loop to show bio info
-
-if (bio.skills.length > 0) {
-	$('#header').append(HTMLskillsStart);
-
-	for (var i in bio.skills) {
-		var formattedSkill = HTMLskills.replace('%data%', bio.skills[i]);
-		$('#skills').append(formattedSkill);
-	}
-}
-
-// Create function to display work details
-
-work.display = function () {
-	if (work.jobs.length > 0) {
-		for (var i in work.jobs) {
-			$('#workExperience').append(HTMLworkStart);
-			var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[i].employer);
-			var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[i].title);
-			var formattedDates = HTMLworkDates.replace('%data%', work.jobs[i].dates);
-	      	var formattedLocation = HTMLworkLocation.replace('%data%', work.jobs[i].location);
-	      	var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[i].description);
-	      	var finalFormat = formattedEmployer + formattedTitle + formattedDates + formattedLocation + formattedDescription;
-			$('.work-entry:last').append(finalFormat);
-		}
-	}
-}
-
-// Create function to display projects
 
 projects.display = function () {
 	projects = projects.projects;
@@ -184,8 +213,6 @@ projects.display = function () {
 		}
 	}
 }
-
-
 
 
 // Click logger functionality
@@ -215,7 +242,8 @@ $('#main').prepend(internationalizeButton);
 $('#mapDiv').append(googleMap);
 
 // Call functions
-
+bio.display();
+education.display();
 work.display();
 projects.display();
 
